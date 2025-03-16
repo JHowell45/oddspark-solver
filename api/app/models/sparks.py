@@ -8,3 +8,11 @@ class BaseSpark(SQLModel):
 
 class Spark(BaseSpark, table=True):
     id: int | None = Field(default=None, primary_key=True)
+
+
+class SparkPublic(BaseSpark):
+    id: int
+
+
+class SparkCreate(BaseSpark):
+    pass
