@@ -1,9 +1,9 @@
 from sqlmodel import Field, SQLModel
 
-from .base import BaseModel
+from .core import DatetimeMixin
 
 
-class AttackType(BaseModel, table=True):
+class AttackType(DatetimeMixin, table=True):
     name: str
 
 
@@ -15,7 +15,7 @@ class BaseSpark(SQLModel):
     capacity: int = Field(ge=0, le=5)
 
 
-class Spark(BaseModel, BaseSpark, table=True):
+class Spark(DatetimeMixin, BaseSpark, table=True):
     pass
 
 
