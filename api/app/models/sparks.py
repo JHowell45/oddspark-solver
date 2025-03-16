@@ -37,3 +37,11 @@ class SparkPublic(DatetimeMixin, BaseSpark):
 
 class SparkCreate(BaseSpark):
     pass
+
+
+class SparkPatch(BaseSpark):
+    name: str | None = None
+    defence: int | None = Field(ge=0, le=5, default=None)
+    offense: int | None = Field(ge=0, le=5, default=None)
+    efficiency: int | None = Field(ge=0, le=5, default=None)
+    capacity: int | None = Field(ge=0, le=5, default=None)
