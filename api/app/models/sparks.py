@@ -3,8 +3,16 @@ from sqlmodel import Field, SQLModel
 from .core import DatetimeMixin
 
 
-class AttackType(DatetimeMixin, table=True):
+class BaseAttackType(SQLModel):
     name: str
+
+
+class AttackType(DatetimeMixin, BaseAttackType, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+
+
+class AttackTypePublic(BaseAttackType):
+    id: int
 
 
 class BaseSpark(SQLModel):
@@ -16,7 +24,7 @@ class BaseSpark(SQLModel):
 
 
 class Spark(DatetimeMixin, BaseSpark, table=True):
-    pass
+    id: int | None = Field(default=None, primary_key=True)
 
 
 class SparkPublic(BaseSpark):
