@@ -26,6 +26,8 @@ class BaseSpark(SQLModel):
     efficiency: int = Field(ge=0, le=5)
     capacity: int = Field(ge=0, le=5)
 
+    attack_type_id: int = Field(foreign_key="attacktype.id", nullable=False)
+
 
 class Spark(DatetimeMixin, BaseSpark, table=True):
     id: int | None = Field(default=None, primary_key=True)
