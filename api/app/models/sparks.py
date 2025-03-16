@@ -11,7 +11,7 @@ class AttackType(DatetimeMixin, BaseAttackType, table=True):
     id: int | None = Field(default=None, primary_key=True)
 
 
-class AttackTypePublic(BaseAttackType):
+class AttackTypePublic(DatetimeMixin, BaseAttackType):
     id: int
 
 
@@ -31,7 +31,7 @@ class Spark(DatetimeMixin, BaseSpark, table=True):
     id: int | None = Field(default=None, primary_key=True)
 
 
-class SparkPublic(BaseSpark):
+class SparkPublic(DatetimeMixin, BaseSpark):
     id: int
 
 

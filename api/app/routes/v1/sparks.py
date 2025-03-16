@@ -15,8 +15,6 @@ from sqlmodel import select
 router = APIRouter(prefix="/sparks")
 attack_type_router = APIRouter(prefix="/attack-type")
 
-router.include_router(attack_type_router)
-
 
 @router.get("/", response_model=list[SparkPublic])
 def get_sparks(
@@ -29,10 +27,11 @@ def get_sparks(
 
 @router.post("/", response_model=SparkPublic)
 def create_spark(model: SparkCreate, session: SessionDep):
-    session.add(model)
+    db_model = AttackType.model_validate(model)
+    session.add(db_model)
     session.commit()
-    session.refresh(model)
-    return model
+    session.refresh(db_model)
+    return db_model
 
 
 @attack_type_router.get("/", response_model=list[AttackTypePublic])
@@ -46,7 +45,11 @@ def get_attack_types(
 
 @attack_type_router.post("/", response_model=AttackTypePublic)
 def create_attack_type(model: AttackTypeCreate, session: SessionDep):
-    session.add(model)
+    db_model = AttackType.model_validate(model)
+    session.add(db_model)
     session.commit()
-    session.refresh(model)
-    return model
+    session.refresh(db_model)
+    return db_model
+
+
+router.include_router(attack_type_router)
