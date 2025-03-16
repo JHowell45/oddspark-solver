@@ -3,6 +3,7 @@ from typing import Annotated
 from app.core.db import SessionDep
 from app.models.sparks import (
     AttackType,
+    AttackTypeCreate,
     AttackTypePublic,
     Spark,
     SparkCreate,
@@ -41,3 +42,11 @@ def get_attack_types(
     limit: Annotated[int, Query(le=100)] = 100,
 ) -> list[AttackTypePublic]:
     return session.exec(select(AttackType).offset(offset).limit(limit)).all()
+
+
+@attack_type_router.post("/", response_model=AttackTypePublic)
+def create_attack_type(model: AttackTypeCreate, session: SessionDep):
+    session.add(model)
+    session.commit()
+    session.refresh(model)
+    return model

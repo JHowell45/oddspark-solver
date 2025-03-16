@@ -15,6 +15,10 @@ class AttackTypePublic(BaseAttackType):
     id: int
 
 
+class AttackTypeCreate(BaseAttackType):
+    pass
+
+
 class BaseSpark(SQLModel):
     name: str
     defence: int = Field(ge=0, le=5)
