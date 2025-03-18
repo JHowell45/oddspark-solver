@@ -29,7 +29,7 @@ def get_sparks(
 
 @router.post("/", response_model=SparkPublic)
 def create_spark(model: SparkCreate, session: SessionDep) -> SparkPublic:
-    db_model = AttackType.model_validate(model)
+    db_model = Spark.model_validate(model)
     session.add(db_model)
     session.commit()
     session.refresh(db_model)

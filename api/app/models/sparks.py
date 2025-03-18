@@ -1,4 +1,4 @@
-from sqlmodel import Field, SQLModel
+from sqlmodel import Field, Relationship, SQLModel
 
 from .core import DatetimeMixin
 
@@ -9,6 +9,8 @@ class BaseAttackType(SQLModel):
 
 class AttackType(DatetimeMixin, BaseAttackType, table=True):
     id: int | None = Field(default=None, primary_key=True)
+
+    sparks: list["Spark"] = Relationship(back_populates="attacktype")
 
 
 class AttackTypePublic(DatetimeMixin, BaseAttackType):
@@ -35,6 +37,7 @@ class Spark(DatetimeMixin, BaseSpark, table=True):
 
 class SparkPublic(DatetimeMixin, BaseSpark):
     id: int
+    attack_type: AttackTypePublic
 
 
 class SparkCreate(BaseSpark):
