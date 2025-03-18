@@ -1,4 +1,4 @@
-from sqlmodel import Field, SQLModel
+from sqlmodel import Field, Relationship, SQLModel
 
 
 class BaseBuilding(SQLModel):
@@ -8,6 +8,14 @@ class BaseBuilding(SQLModel):
 class Building(BaseBuilding, table=True):
     id: int | None = Field(default=None, primary_key=True)
 
+    recipes: list["Recipe"] = Relationship(back_populates="building")
+
 
 class BaseRecipe(SQLModel):
-    pass
+    building_id: int = Field(foreign_key="building.id", nullable=True)
+
+
+class Recipe(BaseRecipe, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+
+    building: Building = Relationship(back_populates="recipes")
