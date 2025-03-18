@@ -10,7 +10,7 @@ class BaseAttackType(SQLModel):
 class AttackType(DatetimeMixin, BaseAttackType, table=True):
     id: int | None = Field(default=None, primary_key=True)
 
-    sparks: list["Spark"] = Relationship(back_populates="attacktype")
+    sparks: list["Spark"] = Relationship(back_populates="attack_type")
 
 
 class AttackTypePublic(DatetimeMixin, BaseAttackType):
@@ -34,7 +34,7 @@ class BaseSpark(SQLModel):
 class Spark(DatetimeMixin, BaseSpark, table=True):
     id: int | None = Field(default=None, primary_key=True)
 
-    attack_type: AttackType = Relationship(back_populates="spark")
+    attack_type: AttackType = Relationship(back_populates="sparks")
 
 
 class SparkPublic(DatetimeMixin, BaseSpark):
