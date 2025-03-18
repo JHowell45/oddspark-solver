@@ -17,13 +17,16 @@ config.set_main_option("sqlalchemy.url", str(settings.DATABASE_URI))
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
+
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
+
+from app.models.items import SQLModel as ItemModels
 from app.models.sparks import SQLModel as SparkModels
 
-target_metadata = [SparkModels.metadata]
+target_metadata = [SparkModels.metadata, ItemModels.metadata]
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
