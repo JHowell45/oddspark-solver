@@ -4,7 +4,7 @@ from .core import DatetimeMixin
 
 
 class BaseAttackType(SQLModel):
-    name: str
+    name: str = Field(unique=True)
 
 
 class AttackType(DatetimeMixin, BaseAttackType, table=True):
@@ -26,7 +26,7 @@ class AttackTypeCreate(BaseAttackType):
 
 
 class BaseSpark(SQLModel):
-    name: str
+    name: str = Field(unique=True)
     defence: int = Field(ge=0, le=5)
     offense: int = Field(ge=0, le=5)
     efficiency: int = Field(ge=0, le=5)
