@@ -34,6 +34,8 @@ class BaseSpark(SQLModel):
 class Spark(DatetimeMixin, BaseSpark, table=True):
     id: int | None = Field(default=None, primary_key=True)
 
+    attack_type: AttackType = Relationship(back_populates="spark")
+
 
 class SparkPublic(DatetimeMixin, BaseSpark):
     id: int
