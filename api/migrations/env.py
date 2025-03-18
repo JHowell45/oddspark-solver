@@ -23,10 +23,11 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 
-from app.models.items import SQLModel as ItemModels
-from app.models.sparks import SQLModel as SparkModels
+from app.models.items import Item  # noqa
+from app.models.sparks import AttackType, Spark  # noqa
+from sqlmodel import SQLModel
 
-target_metadata = [SparkModels.metadata, ItemModels.metadata]
+target_metadata = SQLModel.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
