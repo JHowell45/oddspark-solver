@@ -17,6 +17,10 @@ class AttackTypePublic(DatetimeMixin, BaseAttackType):
     id: int
 
 
+class AttackTypePublicWithSparks(AttackTypePublic):
+    sparks: list["SparkPublic"]
+
+
 class AttackTypeCreate(BaseAttackType):
     pass
 
@@ -39,6 +43,9 @@ class Spark(DatetimeMixin, BaseSpark, table=True):
 
 class SparkPublic(DatetimeMixin, BaseSpark):
     id: int
+
+
+class SparkPublicWithAttackType(SparkPublic):
     attack_type: AttackTypePublic
 
 
